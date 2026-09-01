@@ -1,0 +1,1611 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>全部話しておきたいんだ。 OFFICIAL WEB SITE</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: 耽美な欧文フォント & 日本語明朝体 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@700;900&family=Noto+Serif+JP:wght@300;400;600;900&family=Shippori+Mincho:wght@400;500;700;900&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'goth-black': '#060608',
+            'goth-dark': '#0c0c11',
+            'goth-card': '#121219',
+            'goth-red': '#881337',
+            'goth-crimson': '#be123c',
+            'goth-blood': '#4c0519',
+            'goth-gold': '#c5a059',
+            'goth-gold-light': '#f5e7be',
+            'goth-silver': '#cbd5e1',
+          },
+          fontFamily: {
+            serif: ['"Shippori Mincho"', '"Noto Serif JP"', 'serif'],
+            cinzel: ['"Cinzel"', 'serif'],
+            ornate: ['"Cinzel Decorative"', 'serif'],
+            gothic: ['"UnifrakturMaguntia"', 'cursive'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* -----------------------------------------------------------------
+       V系専用 高精細レタッチフィルター（プリセット別）
+       ----------------------------------------------------------------- */
+    .v-filter-gothic {
+      filter: contrast(1.15) brightness(0.98) saturate(1.12) drop-shadow(0 0 1px rgba(255,255,255,0.1));
+      image-rendering: -webkit-optimize-contrast;
+    }
+    .v-filter-noir {
+      filter: contrast(1.25) brightness(0.92) grayscale(0.85) sepia(0.15);
+      image-rendering: -webkit-optimize-contrast;
+    }
+    .v-filter-crimson {
+      filter: contrast(1.18) brightness(1.02) saturate(1.35) hue-rotate(-5deg);
+      image-rendering: -webkit-optimize-contrast;
+    }
+
+    /* 写真フレームの光沢と質感 */
+    .photo-glass-frame {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.6) 100%);
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.9), 0 10px 30px rgba(0, 0, 0, 0.8);
+    }
+
+    /* カスタムスクロールバー */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #060608;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #881337;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #be123c;
+    }
+
+    /* ゴシック枠線装飾 */
+    .ornate-border {
+      border: 1px solid rgba(197, 160, 89, 0.4);
+      position: relative;
+    }
+    .ornate-border::before {
+      content: '❖';
+      position: absolute;
+      top: -8px;
+      left: -8px;
+      color: #c5a059;
+      font-size: 11px;
+      line-height: 1;
+      text-shadow: 0 0 8px rgba(212, 175, 55, 0.8);
+    }
+    .ornate-border::after {
+      content: '❖';
+      position: absolute;
+      bottom: -8px;
+      right: -8px;
+      color: #c5a059;
+      font-size: 11px;
+      line-height: 1;
+      text-shadow: 0 0 8px rgba(212, 175, 55, 0.8);
+    }
+
+    .gold-text-glow {
+      text-shadow: 0 0 14px rgba(212, 175, 55, 0.6), 0 0 32px rgba(136, 19, 55, 0.5);
+    }
+    .crimson-glow {
+      text-shadow: 0 0 12px rgba(190, 18, 60, 0.85);
+    }
+    .crimson-box-glow {
+      box-shadow: 0 0 35px rgba(136, 19, 55, 0.45);
+    }
+
+    /* 微細なスキャンライン */
+    .scanline-bg {
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.28) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+      background-size: 100% 3px, 3px 100%;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.8; transform: scale(1); filter: drop-shadow(0 0 8px rgba(197, 160, 89, 0.5)); }
+      50% { opacity: 1; transform: scale(1.02); filter: drop-shadow(0 0 18px rgba(190, 18, 60, 0.85)); }
+    }
+    .animate-pulse-glow {
+      animation: pulseGlow 4s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="bg-goth-black text-gray-200 font-serif selection:bg-goth-red selection:text-white relative overflow-x-hidden min-h-screen">
+
+  <!-- Ambient Dust Particle Canvas -->
+  <canvas id="ambientCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
+
+  <!-- Scanline Overlay -->
+  <div class="fixed inset-0 pointer-events-none z-10 scanline-bg opacity-30"></div>
+
+  <!-- BGM Audio Toggle Floating Bar -->
+  <div class="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-goth-card/95 backdrop-blur-md px-4 py-2.5 rounded-full border border-goth-gold/50 shadow-2xl">
+    <div class="flex items-center gap-2">
+      <span id="audioWave" class="flex gap-0.5 items-end h-4 w-4">
+        <span class="w-1 bg-goth-crimson h-2 rounded-sm animate-pulse"></span>
+        <span class="w-1 bg-goth-gold h-4 rounded-sm animate-pulse" style="animation-delay: 0.2s"></span>
+        <span class="w-1 bg-goth-crimson h-3 rounded-sm animate-pulse" style="animation-delay: 0.4s"></span>
+      </span>
+      <span class="text-xs font-cinzel text-goth-gold tracking-widest hidden sm:inline" id="bgmStatusText">BGM: OFF</span>
+    </div>
+    <button id="bgmToggleBtn" onclick="toggleBGM()" class="p-1.5 rounded-full bg-goth-blood/70 hover:bg-goth-red text-goth-gold-light transition duration-300" title="BGM切替">
+      <i data-lucide="volume-x" id="bgmIcon" class="w-4 h-4"></i>
+    </button>
+  </div>
+
+  <!-- =========================================================================
+       NAVIGATION BAR
+       ========================================================================= -->
+  <header class="fixed top-0 left-0 w-full z-40 bg-goth-black/90 backdrop-blur-md border-b border-goth-gold/30 transition-all duration-300" id="mainHeader">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo Container -->
+      <a href="#hero" class="flex items-center gap-3 group">
+        <div id="headerLogoContainer" class="w-11 h-11 rounded-full border border-goth-gold flex items-center justify-center bg-goth-blood/40 group-hover:border-goth-crimson group-hover:shadow-[0_0_15px_rgba(190,18,60,0.6)] transition duration-500 overflow-hidden p-1">
+          <!-- Logo SVG injected via JS -->
+        </div>
+        <div class="flex flex-col">
+          <span class="font-serif font-black text-lg tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-amber-100 via-amber-300 to-rose-400 group-hover:from-rose-300 group-hover:to-amber-200 transition duration-500">
+            全部話しておきたいんだ。
+          </span>
+          <span class="font-cinzel text-[10px] text-goth-gold/90 tracking-widest -mt-0.5">ZENBU HANASHITE OKITAINDA.</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden lg:flex items-center space-x-6 text-xs tracking-widest font-cinzel font-semibold">
+        <a href="#news" class="text-gray-300 hover:text-goth-gold transition duration-300 relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-goth-crimson hover:after:w-full after:transition-all">NEWS</a>
+        <a href="#profile" class="text-gray-300 hover:text-goth-gold transition duration-300 relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-goth-crimson hover:after:w-full after:transition-all">PROFILE</a>
+        <a href="#live" class="text-gray-300 hover:text-goth-gold transition duration-300 relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-goth-crimson hover:after:w-full after:transition-all">LIVE</a>
+        <a href="#discography" class="text-gray-300 hover:text-goth-gold transition duration-300 relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-goth-crimson hover:after:w-full after:transition-all">DISCO</a>
+        <a href="#goods" class="text-gray-300 hover:text-goth-gold transition duration-300 relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-goth-crimson hover:after:w-full after:transition-all">GOODS</a>
+        <a href="#gallery" class="text-gray-300 hover:text-goth-gold transition duration-300 relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-goth-crimson hover:after:w-full after:transition-all">GALLERY</a>
+        <a href="#contact" class="text-gray-300 hover:text-goth-gold transition duration-300 relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-goth-crimson hover:after:w-full after:transition-all">CONTACT</a>
+        
+        <!-- LinkCore Official Streaming External Link -->
+        <a href="https://linkco.re/eUVZdT05" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded bg-gradient-to-r from-goth-blood to-goth-red hover:from-goth-red hover:to-rose-600 text-white border border-rose-500/50 flex items-center gap-1.5 shadow-[0_0_10px_rgba(190,18,60,0.4)] transition duration-300">
+          <i data-lucide="headphones" class="w-3.5 h-3.5"></i>
+          <span>配信を聴く</span>
+        </a>
+
+        <!-- Logo Proposal Switcher Trigger -->
+        <button onclick="openLogoSelectorModal()" class="px-3 py-1.5 rounded border border-goth-gold text-goth-gold hover:bg-goth-gold hover:text-black transition duration-300 flex items-center gap-1.5 text-[11px]">
+          <i data-lucide="palette" class="w-3.5 h-3.5"></i>
+          <span>ロゴ案切替</span>
+        </button>
+      </nav>
+
+      <!-- Mobile Hamburger Button -->
+      <button onclick="toggleMobileMenu()" class="lg:hidden text-goth-gold p-2 focus:outline-none" aria-label="Toggle Menu">
+        <i data-lucide="menu" id="menuIcon" class="w-6 h-6"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Dropdown -->
+    <div id="mobileMenu" class="hidden lg:hidden bg-goth-black/98 border-b border-goth-blood px-6 py-6 space-y-4">
+      <a href="#news" onclick="toggleMobileMenu()" class="block text-sm font-cinzel tracking-widest text-gray-200 hover:text-goth-gold">NEWS / 最新情報</a>
+      <a href="#profile" onclick="toggleMobileMenu()" class="block text-sm font-cinzel tracking-widest text-gray-200 hover:text-goth-gold">PROFILE / メンバー</a>
+      <a href="#live" onclick="toggleMobileMenu()" class="block text-sm font-cinzel tracking-widest text-gray-200 hover:text-goth-gold">LIVE / 単独巡業・チケット</a>
+      <a href="#discography" onclick="toggleMobileMenu()" class="block text-sm font-cinzel tracking-widest text-gray-200 hover:text-goth-gold">DISCO / 音源配信</a>
+      <a href="#goods" onclick="toggleMobileMenu()" class="block text-sm font-cinzel tracking-widest text-gray-200 hover:text-goth-gold">GOODS / 公式通販</a>
+      <a href="#gallery" onclick="toggleMobileMenu()" class="block text-sm font-cinzel tracking-widest text-gray-200 hover:text-goth-gold">GALLERY / 写真画廊</a>
+      <a href="#contact" onclick="toggleMobileMenu()" class="block text-sm font-cinzel tracking-widest text-gray-200 hover:text-goth-gold">CONTACT / お問い合わせ</a>
+      <div class="pt-3 border-t border-gray-800 flex flex-col gap-3">
+        <a href="https://linkco.re/eUVZdT05" target="_blank" rel="noopener noreferrer" class="py-2.5 text-center rounded bg-goth-crimson text-white text-xs font-bold flex items-center justify-center gap-2">
+          <i data-lucide="headphones" class="w-4 h-4"></i> LinkCore 楽曲配信リンク
+        </a>
+        <button onclick="openLogoSelectorModal(); toggleMobileMenu();" class="py-2 text-center rounded border border-goth-gold text-goth-gold text-xs font-bold flex items-center justify-center gap-2">
+          <i data-lucide="palette" class="w-4 h-4"></i> ロゴ案4パターンを比較する
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       HERO SECTION
+       ========================================================================= -->
+  <section id="hero" class="relative min-h-screen pt-24 pb-16 flex items-center justify-center overflow-hidden z-20">
+    <!-- Background Light & Vignette -->
+    <div class="absolute inset-0 bg-gradient-to-t from-goth-black via-transparent to-goth-black/80 z-10 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(136,19,55,0.25)_0%,transparent_75%)] z-10 pointer-events-none"></div>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-20 flex flex-col items-center text-center">
+      
+      <!-- Interactive Dynamic Symbol Emblem in Hero -->
+      <div class="mb-4 animate-pulse-glow cursor-pointer group" onclick="openLogoSelectorModal()" title="クリックしてロゴデザイン4案を変更">
+        <div id="heroEmblemContainer" class="w-24 h-24 sm:w-28 sm:h-28 mx-auto flex items-center justify-center p-2 rounded-full border border-goth-gold/50 bg-goth-card/80 backdrop-blur-md group-hover:border-goth-crimson group-hover:scale-105 transition duration-500 shadow-2xl">
+          <!-- Logo SVG injected via JS -->
+        </div>
+        <span class="text-[10px] font-cinzel text-goth-gold/70 group-hover:text-goth-crimson block mt-1 tracking-widest">
+          [ ❖ CLICK TO PREVIEW 4 LOGO CONCEPTS ❖ ]
+        </span>
+      </div>
+
+      <!-- Main Logo Title -->
+      <div class="relative py-4 px-6 mb-3">
+        <div class="absolute -inset-x-8 -inset-y-2 border-y border-goth-gold/30 flex justify-between items-center px-2 pointer-events-none">
+          <span class="text-goth-gold text-xs">✦</span>
+          <span class="text-goth-gold text-xs">✦</span>
+        </div>
+        <h1 class="text-3xl sm:text-5xl md:text-7xl font-serif font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-b from-[#fff7e6] via-[#d4af37] to-[#881337] gold-text-glow">
+          全部話しておきたいんだ。
+        </h1>
+        <p class="font-cinzel text-xs sm:text-sm md:text-base text-goth-gold tracking-[0.35em] mt-3 uppercase">
+          We want to tell you everything.
+        </p>
+      </div>
+
+      <!-- Catchphrase -->
+      <p class="text-sm sm:text-base text-gray-300 font-light tracking-[0.25em] max-w-2xl mb-6 leading-relaxed">
+        「言えない痛みを、隠した傷跡を、今夜すべて曝け出す——」
+      </p>
+
+      <!-- Key Visual Frame (Highest Resolution Container) -->
+      <div class="relative w-full max-w-4xl mx-auto mb-8 group">
+        <div class="relative rounded-lg p-2 sm:p-3 bg-gradient-to-b from-goth-gold/50 via-goth-blood/40 to-goth-black border border-goth-gold/60 crimson-box-glow">
+          
+          <div class="relative w-full h-[340px] sm:h-[480px] md:h-[560px] rounded overflow-hidden bg-black flex items-center justify-center shadow-2xl photo-glass-frame">
+            <img id="mainKeyVisual" 
+                 src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1600&auto=format&fit=crop" 
+                 alt="全部話しておきたいんだ。 3-Shot Main Key Visual" 
+                 class="w-full h-full object-cover object-center v-filter-gothic select-none transition-all duration-500">
+
+            <div class="absolute inset-0 bg-gradient-to-t from-goth-black via-transparent to-black/20 pointer-events-none"></div>
+
+            <div class="absolute bottom-4 inset-x-4 z-20 flex flex-col sm:flex-row justify-between items-center gap-3 bg-goth-black/90 backdrop-blur-md p-3.5 sm:p-4 rounded border border-goth-gold/40">
+              <div class="text-left">
+                <span class="inline-block px-2.5 py-0.5 rounded text-[10px] bg-goth-crimson text-white font-cinzel tracking-wider">OFFICIAL STREAMING</span>
+                <h3 class="text-base sm:text-lg font-bold text-goth-gold-light mt-0.5">3人編成ヴィジュアル系バンド「全部話しておきたいんだ。」</h3>
+              </div>
+              <div class="flex gap-2.5 w-full sm:w-auto">
+                <a href="https://linkco.re/eUVZdT05" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none px-5 py-2 rounded bg-gradient-to-r from-goth-blood to-goth-crimson hover:from-goth-red hover:to-rose-600 text-white text-xs font-bold tracking-widest transition duration-300 flex items-center justify-center gap-1.5 shadow-lg">
+                  <i data-lucide="play" class="w-3.5 h-3.5"></i> LinkCore で聴く
+                </a>
+                <button onclick="openImageLightbox('mainKeyVisual', '全部話しておきたいんだ。 集合メインヴィジュアル')" class="px-3.5 py-2 rounded bg-goth-dark border border-goth-gold/50 text-goth-gold hover:text-white text-xs transition flex items-center gap-1" title="高画質全画面拡大">
+                  <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+                  <span class="hidden sm:inline">高画質拡大</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="absolute top-2.5 left-2.5 text-goth-gold text-lg pointer-events-none drop-shadow-[0_0_5px_rgba(212,175,55,0.8)]">╔</div>
+            <div class="absolute top-2.5 right-2.5 text-goth-gold text-lg pointer-events-none drop-shadow-[0_0_5px_rgba(212,175,55,0.8)]">╗</div>
+            <div class="absolute bottom-2.5 left-2.5 text-goth-gold text-lg pointer-events-none drop-shadow-[0_0_5px_rgba(212,175,55,0.8)]">╚</div>
+            <div class="absolute bottom-2.5 right-2.5 text-goth-gold text-lg pointer-events-none drop-shadow-[0_0_5px_rgba(212,175,55,0.8)]">╝</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Action Buttons -->
+      <div class="flex flex-wrap justify-center gap-3.5 text-xs font-cinzel tracking-widest">
+        <a href="https://linkco.re/eUVZdT05" target="_blank" rel="noopener noreferrer" class="px-6 py-2.5 rounded-full bg-gradient-to-r from-goth-blood via-goth-red to-goth-crimson text-white font-bold hover:shadow-[0_0_20px_rgba(190,18,60,0.6)] transition duration-300 flex items-center gap-2">
+          <i data-lucide="music" class="w-4 h-4"></i> LINKCORE STREAMING
+        </a>
+        <a href="#live" class="px-6 py-2.5 rounded-full border border-goth-gold/60 text-goth-gold-light hover:bg-goth-gold hover:text-black transition duration-300">
+          TOUR SCHEDULE / TICKETS
+        </a>
+        <a href="#profile" class="px-6 py-2.5 rounded-full border border-gray-700 text-gray-300 hover:border-goth-crimson hover:text-white transition duration-300">
+          MEMBER PROFILE
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       MEMBER PROFILE SECTION (3-Piece: 刹那 Gt[左] / 結映 Vo[中] / 祐輝 Gt[右])
+       ========================================================================= -->
+  <section id="profile" class="py-24 bg-goth-black relative z-20 border-t border-goth-gold/20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <span class="font-cinzel text-xs text-goth-gold tracking-[0.4em] uppercase block mb-1">Members</span>
+        <h2 class="text-3xl sm:text-5xl font-serif font-bold text-white tracking-widest">
+          構成員
+        </h2>
+        <p class="text-xs text-gray-400 font-cinzel mt-2 tracking-widest">ARTIST PROFILE (3-PIECE BAND)</p>
+        
+        <!-- Costume Switcher for Profiles -->
+        <div class="mt-6 inline-flex items-center gap-2 bg-goth-dark p-1.5 rounded-full border border-goth-gold/40">
+          <button onclick="switchMemberCostume('gothic')" id="costumeBtn-gothic" class="px-4 py-1.5 rounded-full text-xs font-cinzel bg-goth-gold text-black font-bold transition">
+            PHASE 1: DARK GOTHIC
+          </button>
+          <button onclick="switchMemberCostume('twilight')" id="costumeBtn-twilight" class="px-4 py-1.5 rounded-full text-xs font-cinzel text-gray-400 hover:text-white transition">
+            PHASE 2: TWILIGHT NOIR
+          </button>
+        </div>
+        <div class="w-20 h-0.5 bg-gradient-to-r from-transparent via-goth-crimson to-transparent mx-auto mt-6"></div>
+      </div>
+
+      <!-- Member Cards Container (3 Members Arranged Left -> Center -> Right) -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- MEMBER 1: 【左配置】刹那 (Setsuna) / Guitar -->
+        <div class="bg-goth-card rounded-lg overflow-hidden border border-goth-gold/30 hover:border-goth-gold transition-all duration-500 group flex flex-col order-1">
+          <div class="relative h-[420px] overflow-hidden bg-goth-dark cursor-pointer photo-glass-frame" onclick="openImageLightbox('setsunaImg', '刹那 - Setsuna (Guitar)')">
+            <img id="setsunaImg" 
+                 src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1200&auto=format&fit=crop" 
+                 alt="刹那 - Setsuna" 
+                 class="w-full h-full object-cover object-top v-filter-gothic group-hover:scale-105 transition-all duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-goth-card via-black/20 to-transparent"></div>
+            
+            <div class="absolute top-3 right-3 text-[10px] font-cinzel px-2.5 py-0.5 rounded border border-goth-gold/50 text-goth-gold bg-black/75 backdrop-blur-sm">
+              GUITAR / COMPOSER
+            </div>
+            <div class="absolute bottom-3 left-4 right-4 flex justify-between items-end">
+              <div>
+                <span class="text-xs font-cinzel text-goth-gold block">STAGE LEFT (左配置)</span>
+                <h4 class="text-2xl font-serif font-black text-white">刹那 <span class="text-xs font-cinzel text-gray-400 font-normal">SETSUNA</span></h4>
+              </div>
+              <span class="text-[10px] text-goth-gold/90 bg-black/70 px-2 py-1 rounded flex items-center gap-1">
+                <i data-lucide="zoom-in" class="w-3 h-3"></i> 拡大
+              </span>
+            </div>
+          </div>
+
+          <!-- Details -->
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-2 mb-3">
+                <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+                <span class="text-xs text-goth-gold font-cinzel tracking-wider">GUITARIST</span>
+              </div>
+              <p class="text-xs text-gray-300 leading-relaxed mb-4">
+                叙情的な旋律と構築美を司るギタリスト。バンドの楽曲制作・作曲の中心として重厚かつ繊細な世界観を紡ぎ出す。
+              </p>
+              
+              <div class="grid grid-cols-2 gap-2 text-[11px] border-t border-b border-gray-800 py-3 mb-4 text-gray-400 font-serif">
+                <div><span class="text-gray-500">誕生日:</span> 1月4日</div>
+                <div><span class="text-gray-500">血液型:</span> A型(たしか)</div>
+                <div><span class="text-gray-500">趣味:</span> 作曲</div>
+                <div><span class="text-gray-500">特技:</span> ばくれつけん</div>
+              </div>
+            </div>
+            <button onclick="openMemberModal('setsuna')" class="w-full py-2 rounded bg-goth-black hover:bg-goth-blood border border-goth-gold/30 hover:border-goth-crimson text-xs text-goth-gold tracking-widest transition duration-300">
+              MORE PROFILE
+            </button>
+          </div>
+        </div>
+
+        <!-- MEMBER 2: 【中央配置】結映 (Yue) / Vocal -->
+        <div class="bg-goth-card rounded-lg overflow-hidden border-2 border-goth-gold/70 hover:border-goth-crimson transition-all duration-500 group flex flex-col order-2 shadow-2xl relative">
+          <!-- Center Crown Indicator -->
+          <div class="absolute top-2 left-2 z-30 px-2 py-0.5 rounded bg-goth-blood/90 border border-goth-gold text-[10px] text-amber-200 font-cinzel flex items-center gap-1">
+            <i data-lucide="crown" class="w-3 h-3 text-goth-gold"></i> FRONTMAN
+          </div>
+
+          <div class="relative h-[420px] overflow-hidden bg-goth-dark cursor-pointer photo-glass-frame" onclick="openImageLightbox('yueImg', '結映 - Yue (Vocal)')">
+            <img id="yueImg" 
+                 src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1200&auto=format&fit=crop" 
+                 alt="結映 - Yue (Vocal)" 
+                 class="w-full h-full object-cover object-top v-filter-gothic group-hover:scale-105 transition-all duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-goth-card via-black/20 to-transparent"></div>
+            
+            <div class="absolute top-3 right-3 text-[10px] font-cinzel px-2.5 py-0.5 rounded border border-goth-crimson text-rose-300 bg-black/80 backdrop-blur-sm font-bold">
+              VOCAL / WORDS
+            </div>
+            <div class="absolute bottom-3 left-4 right-4 flex justify-between items-end">
+              <div>
+                <span class="text-xs font-cinzel text-goth-crimson block font-bold">CENTER (中央配置)</span>
+                <h4 class="text-2xl font-serif font-black text-white">結映 <span class="text-xs font-cinzel text-gray-400 font-normal">YUE</span></h4>
+              </div>
+              <span class="text-[10px] text-goth-gold/90 bg-black/70 px-2 py-1 rounded flex items-center gap-1">
+                <i data-lucide="zoom-in" class="w-3 h-3"></i> 拡大
+              </span>
+            </div>
+          </div>
+
+          <!-- Details -->
+          <div class="p-6 flex-1 flex flex-col justify-between bg-gradient-to-b from-goth-card to-goth-black">
+            <div>
+              <div class="flex items-center gap-2 mb-3">
+                <span class="w-2 h-2 rounded-full bg-goth-crimson animate-pulse"></span>
+                <span class="text-xs text-goth-crimson font-cinzel tracking-wider font-bold">VOCALIST & FRONTMAN</span>
+              </div>
+              <p class="text-xs text-gray-300 leading-relaxed mb-4">
+                「全部話しておきたいんだ。」の全歌詞と世界観を司るフロントマン。突き刺さるような激情のハイトーンと囁くような語り口で聴き手の感情を揺さぶる。
+              </p>
+              
+              <div class="grid grid-cols-2 gap-2 text-[11px] border-t border-b border-gray-800 py-3 mb-4 text-gray-400 font-serif">
+                <div><span class="text-gray-500">誕生日:</span> 6月19日</div>
+                <div><span class="text-gray-500">血液型:</span> O型(たぶん)</div>
+                <div><span class="text-gray-500">趣味:</span> 犬の散歩</div>
+                <div><span class="text-gray-500">特技:</span> ちからため</div>
+              </div>
+            </div>
+            <button onclick="openMemberModal('yue')" class="w-full py-2 rounded bg-goth-blood hover:bg-goth-red border border-goth-crimson text-xs text-white tracking-widest font-bold transition duration-300 shadow">
+              MORE PROFILE
+            </button>
+          </div>
+        </div>
+
+        <!-- MEMBER 3: 【右配置】祐輝 (Yuki) / Guitar -->
+        <div class="bg-goth-card rounded-lg overflow-hidden border border-goth-gold/30 hover:border-goth-gold transition-all duration-500 group flex flex-col order-3">
+          <div class="relative h-[420px] overflow-hidden bg-goth-dark cursor-pointer photo-glass-frame" onclick="openImageLightbox('yukiImg', '祐輝 - Yuki (Guitar)')">
+            <img id="yukiImg" 
+                 src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop" 
+                 alt="祐輝 - Yuki" 
+                 class="w-full h-full object-cover object-top v-filter-gothic group-hover:scale-105 transition-all duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-goth-card via-black/20 to-transparent"></div>
+            
+            <div class="absolute top-3 right-3 text-[10px] font-cinzel px-2.5 py-0.5 rounded border border-goth-gold/50 text-goth-gold bg-black/75 backdrop-blur-sm">
+              GUITAR / PERFORMANCE
+            </div>
+            <div class="absolute bottom-3 left-4 right-4 flex justify-between items-end">
+              <div>
+                <span class="text-xs font-cinzel text-goth-gold block">STAGE RIGHT (右配置)</span>
+                <h4 class="text-2xl font-serif font-black text-white">祐輝 <span class="text-xs font-cinzel text-gray-400 font-normal">YUKI</span></h4>
+              </div>
+              <span class="text-[10px] text-goth-gold/90 bg-black/70 px-2 py-1 rounded flex items-center gap-1">
+                <i data-lucide="zoom-in" class="w-3 h-3"></i> 拡大
+              </span>
+            </div>
+          </div>
+
+          <!-- Details -->
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-2 mb-3">
+                <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+                <span class="text-xs text-goth-gold font-cinzel tracking-wider">GUITARIST</span>
+              </div>
+              <p class="text-xs text-gray-300 leading-relaxed mb-4">
+                アグレッシブなリフワークとダイナミックなステージングでフロアを熱狂させるギタリスト。卓越した運動神経と存在感でライブを牽引する。
+              </p>
+              
+              <div class="grid grid-cols-2 gap-2 text-[11px] border-t border-b border-gray-800 py-3 mb-4 text-gray-400 font-serif">
+                <div><span class="text-gray-500">誕生日:</span> 5月27日</div>
+                <div><span class="text-gray-500">血液型:</span> O型(Ogata)</div>
+                <div><span class="text-gray-500">趣味:</span> ゲーム</div>
+                <div><span class="text-gray-500">特技:</span> バク転</div>
+              </div>
+            </div>
+            <button onclick="openMemberModal('yuki')" class="w-full py-2 rounded bg-goth-black hover:bg-goth-blood border border-goth-gold/30 hover:border-goth-crimson text-xs text-goth-gold tracking-widest transition duration-300">
+              MORE PROFILE
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       LIVE TOUR & TICKETS SECTION (完全復元 & 予約機能強化)
+       ========================================================================= -->
+  <section id="live" class="py-24 bg-goth-dark relative z-20 border-t border-goth-gold/20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center mb-14">
+        <span class="font-cinzel text-xs text-goth-crimson tracking-[0.4em] uppercase block mb-1">Live Tour & Schedule</span>
+        <h2 class="text-3xl sm:text-5xl font-serif font-bold text-goth-gold-light tracking-widest">
+          単独巡業・公演日程
+        </h2>
+        <p class="text-xs text-gray-400 font-cinzel mt-2 tracking-widest">LIVE SCHEDULE & TICKET RESERVATION</p>
+        <div class="w-20 h-0.5 bg-goth-gold mx-auto mt-4"></div>
+      </div>
+
+      <!-- Tour Banner Card -->
+      <div class="mb-10 p-6 sm:p-8 rounded-lg bg-gradient-to-r from-goth-blood/80 via-goth-card to-goth-blood/80 border border-goth-gold/50 text-center relative overflow-hidden ornate-border shadow-2xl">
+        <div class="absolute -right-6 -bottom-6 opacity-10 text-8xl sm:text-9xl font-gothic pointer-events-none select-none">巡業</div>
+        <span class="text-xs font-cinzel text-goth-gold tracking-widest block mb-1">AUTUMN / WINTER ONE-MAN TOUR 2026</span>
+        <h3 class="text-2xl sm:text-4xl font-serif font-black text-white mb-2">単独巡業『言えなかった告白』</h3>
+        <p class="text-xs text-gray-300 max-w-xl mx-auto">
+          開場 17:30 / 開演 18:30 ｜ 前売 ¥4,800 / 当日 ¥5,500 (D代別)<br>
+          全会場にて限定ピクチャーチケットおよび撮り下ろし特製ポストカード配布
+        </p>
+      </div>
+
+      <!-- Tour Dates List -->
+      <div class="space-y-4 mb-12">
+        
+        <!-- Live Date 1 -->
+        <div class="p-5 sm:p-6 rounded-lg bg-goth-card border border-gray-800 hover:border-goth-gold transition-all duration-300 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-lg group">
+          <div class="flex items-center gap-6">
+            <div class="text-center min-w-[75px] border-r border-gray-800 pr-6">
+              <span class="block text-2xl sm:text-3xl font-cinzel font-black text-goth-gold group-hover:text-amber-300 transition">10.31</span>
+              <span class="text-[10px] font-cinzel text-gray-400">SAT [TOUR FINAL]</span>
+            </div>
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="px-2 py-0.5 rounded text-[10px] bg-goth-red text-white font-bold">TOUR FINAL</span>
+                <span class="text-xs text-gray-400">東京・渋谷</span>
+              </div>
+              <h4 class="text-lg sm:text-xl font-bold text-white">Shibuya CLUB QUATTRO</h4>
+              <p class="text-xs text-gray-400">1st Full Album『話しておくよ』Release Special & 結映 聖誕祭</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 w-full md:w-auto justify-end">
+            <span class="text-xs text-emerald-400 font-cinzel tracking-wider mr-2 flex items-center gap-1">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> ON SALE
+            </span>
+            <button onclick="openTicketModal('10/31 渋谷CLUB QUATTRO')" class="px-6 py-2.5 rounded bg-gradient-to-r from-goth-blood via-goth-red to-goth-crimson hover:from-goth-red hover:to-rose-600 text-white text-xs font-bold tracking-wider transition duration-300 shadow-[0_0_15px_rgba(190,18,60,0.5)] flex items-center gap-1.5">
+              <i data-lucide="ticket" class="w-4 h-4"></i> TICKET 予約
+            </button>
+          </div>
+        </div>
+
+        <!-- Live Date 2 -->
+        <div class="p-5 sm:p-6 rounded-lg bg-goth-card border border-gray-800 hover:border-goth-gold transition-all duration-300 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-lg group">
+          <div class="flex items-center gap-6">
+            <div class="text-center min-w-[75px] border-r border-gray-800 pr-6">
+              <span class="block text-2xl sm:text-3xl font-cinzel font-black text-goth-gold group-hover:text-amber-300 transition">11.14</span>
+              <span class="text-[10px] font-cinzel text-gray-400">SAT</span>
+            </div>
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="px-2 py-0.5 rounded text-[10px] bg-amber-950 text-amber-300 font-bold">ONEMAN</span>
+                <span class="text-xs text-gray-400">愛知・名古屋</span>
+              </div>
+              <h4 class="text-lg sm:text-xl font-bold text-white">Nagoya ElectricLadyLand (E.L.L)</h4>
+              <p class="text-xs text-gray-400">単独巡業 2026『言えなかった告白』名古屋編</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 w-full md:w-auto justify-end">
+            <span class="text-xs text-amber-400 font-cinzel tracking-wider mr-2">残りわずか</span>
+            <button onclick="openTicketModal('11/14 名古屋E.L.L')" class="px-6 py-2.5 rounded bg-gradient-to-r from-goth-blood via-goth-red to-goth-crimson hover:from-goth-red hover:to-rose-600 text-white text-xs font-bold tracking-wider transition duration-300 shadow flex items-center gap-1.5">
+              <i data-lucide="ticket" class="w-4 h-4"></i> TICKET 予約
+            </button>
+          </div>
+        </div>
+
+        <!-- Live Date 3 -->
+        <div class="p-5 sm:p-6 rounded-lg bg-goth-card border border-gray-800 hover:border-goth-gold transition-all duration-300 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-lg group">
+          <div class="flex items-center gap-6">
+            <div class="text-center min-w-[75px] border-r border-gray-800 pr-6">
+              <span class="block text-2xl sm:text-3xl font-cinzel font-black text-goth-gold group-hover:text-amber-300 transition">11.28</span>
+              <span class="text-[10px] font-cinzel text-gray-400">SAT</span>
+            </div>
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="px-2 py-0.5 rounded text-[10px] bg-amber-950 text-amber-300 font-bold">ONEMAN</span>
+                <span class="text-xs text-gray-400">大阪・梅田</span>
+              </div>
+              <h4 class="text-lg sm:text-xl font-bold text-white">Umeda Shangri-La</h4>
+              <p class="text-xs text-gray-400">単独巡業 2026『言えなかった告白』大阪編</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 w-full md:w-auto justify-end">
+            <span class="text-xs text-emerald-400 font-cinzel tracking-wider mr-2">ON SALE</span>
+            <button onclick="openTicketModal('11/28 梅田Shangri-La')" class="px-6 py-2.5 rounded bg-gradient-to-r from-goth-blood via-goth-red to-goth-crimson hover:from-goth-red hover:to-rose-600 text-white text-xs font-bold tracking-wider transition duration-300 shadow flex items-center gap-1.5">
+              <i data-lucide="ticket" class="w-4 h-4"></i> TICKET 予約
+            </button>
+          </div>
+        </div>
+
+        <!-- Live Date 4 (Event) -->
+        <div class="p-5 sm:p-6 rounded-lg bg-goth-card border border-gray-800 hover:border-goth-gold transition-all duration-300 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-lg group opacity-90">
+          <div class="flex items-center gap-6">
+            <div class="text-center min-w-[75px] border-r border-gray-800 pr-6">
+              <span class="block text-2xl sm:text-3xl font-cinzel font-black text-gray-400 group-hover:text-amber-300 transition">12.24</span>
+              <span class="text-[10px] font-cinzel text-gray-500">THU [X'MAS EVE]</span>
+            </div>
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="px-2 py-0.5 rounded text-[10px] bg-purple-950 text-purple-300 font-bold">EVENT</span>
+                <span class="text-xs text-gray-400">東京・新宿</span>
+              </div>
+              <h4 class="text-lg sm:text-xl font-bold text-white">Shinjuku BLAZE</h4>
+              <p class="text-xs text-gray-400">Visual Rock Holy Night Fes 2026</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 w-full md:w-auto justify-end">
+            <span class="text-xs text-rose-400 font-cinzel tracking-wider mr-2">SOON</span>
+            <button onclick="openTicketModal('12/24 新宿BLAZE (Holy Night Fes)')" class="px-6 py-2.5 rounded bg-gray-800 hover:bg-goth-blood text-gray-300 hover:text-white text-xs font-bold tracking-wider transition duration-300 border border-gray-700 flex items-center gap-1.5">
+              <i data-lucide="ticket" class="w-4 h-4"></i> 詳細・予約
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Ticket Notice -->
+      <div class="p-4 rounded bg-black/50 border border-gray-800 text-xs text-gray-400 text-center leading-relaxed">
+        ※ チケットWEB予約完了後、登録メールアドレス宛に予約完了メールと整理番号が自動送信されます。<br>
+        ※ 入場順：① FC「告白の部屋」VIPチケット → ② WEB先行予約整理番号順 → ③ 一般当日券
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       DISCOGRAPHY & LINKCORE STREAMING SECTION
+       ========================================================================= -->
+  <section id="discography" class="py-24 bg-goth-black relative z-20 border-t border-goth-blood/30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <span class="font-cinzel text-xs text-goth-gold tracking-[0.4em] uppercase block mb-1">Discography</span>
+        <h2 class="text-3xl sm:text-5xl font-serif font-bold text-white tracking-widest">音源作品・配信</h2>
+        <p class="text-xs text-gray-400 font-cinzel mt-2 tracking-widest">DIGITAL STREAMING & RELEASES</p>
+        <div class="w-20 h-0.5 bg-goth-crimson mx-auto mt-4"></div>
+      </div>
+
+      <div class="bg-goth-card rounded-xl p-6 sm:p-10 border border-goth-gold/40 crimson-box-glow mb-14 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        <div class="md:col-span-5 flex flex-col items-center">
+          <div class="relative w-64 h-64 sm:w-72 sm:h-72 rounded-lg bg-gradient-to-tr from-black via-goth-blood to-goth-card p-3 border border-goth-gold/50 shadow-2xl group">
+            <div class="w-full h-full rounded bg-black flex flex-col items-center justify-center p-6 text-center relative overflow-hidden border border-goth-gold/20">
+              <div class="w-12 h-12 mb-2" id="discoCoverLogo"></div>
+              <h3 class="font-serif font-black text-xl text-white">話しておくよ</h3>
+              <p class="text-[10px] font-cinzel text-goth-gold tracking-widest mt-1">1st FULL ALBUM</p>
+              <div class="mt-4 text-[11px] text-gray-400">全11曲 配信中</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="md:col-span-7 space-y-5">
+          <div>
+            <span class="px-2.5 py-0.5 rounded text-[10px] bg-goth-crimson text-white font-cinzel font-bold">STREAMING & DOWNLOAD</span>
+            <h3 class="text-2xl sm:text-3xl font-serif font-bold text-white mt-1">『話しておくよ』</h3>
+            <p class="text-xs text-gray-400 mt-1">Apple Music, Spotify, LINE MUSIC, YouTube Music 他 各社ストリーミング配信中</p>
+          </div>
+
+          <div class="space-y-2 border-t border-b border-gray-800 py-4 text-xs">
+            <div class="flex items-center justify-between p-2 rounded hover:bg-goth-blood/40 cursor-pointer transition" onclick="playMelody(0, '全部話しておきたいんだ。')">
+              <div class="flex items-center gap-3">
+                <span class="font-cinzel text-goth-gold font-bold">01.</span>
+                <span class="text-gray-200">全部話しておきたいんだ。 <span class="text-[10px] text-goth-gold ml-1">★リード曲</span></span>
+              </div>
+              <i data-lucide="play-circle" class="w-4 h-4 text-goth-gold"></i>
+            </div>
+            <div class="flex items-center justify-between p-2 rounded hover:bg-goth-blood/40 cursor-pointer transition" onclick="playMelody(1, '言えなかった手紙')">
+              <div class="flex items-center gap-3">
+                <span class="font-cinzel text-goth-gold font-bold">02.</span>
+                <span class="text-gray-200">言えなかった手紙</span>
+              </div>
+              <i data-lucide="play-circle" class="w-4 h-4 text-goth-gold"></i>
+            </div>
+            <div class="flex items-center justify-between p-2 rounded hover:bg-goth-blood/40 cursor-pointer transition" onclick="playMelody(2, '紫煙とロザリオ')">
+              <div class="flex items-center gap-3">
+                <span class="font-cinzel text-goth-gold font-bold">03.</span>
+                <span class="text-gray-200">紫煙とロザリオ</span>
+              </div>
+              <i data-lucide="play-circle" class="w-4 h-4 text-goth-gold"></i>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <a href="https://linkco.re/eUVZdT05" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded bg-gradient-to-r from-goth-blood via-goth-red to-goth-crimson hover:from-goth-red hover:to-rose-600 text-white font-bold text-xs tracking-wider transition duration-300 shadow-xl">
+              <i data-lucide="headphones" class="w-4 h-4"></i> LinkCore 配信リンクを開く
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       OFFICIAL GOODS SECTION
+       ========================================================================= -->
+  <section id="goods" class="py-24 bg-goth-dark relative z-20 border-t border-goth-gold/20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-16">
+        <span class="font-cinzel text-xs text-goth-crimson tracking-[0.4em] uppercase block mb-1">Official Merch</span>
+        <h2 class="text-3xl sm:text-5xl font-serif font-bold text-goth-gold-light tracking-widest">
+          公式物販
+        </h2>
+        <p class="text-xs text-gray-400 font-cinzel mt-2 tracking-widest">TOUR GOODS & ONLINE STORE</p>
+        <div class="w-20 h-0.5 bg-goth-gold mx-auto mt-4"></div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+        
+        <!-- Good 1 -->
+        <div class="bg-goth-card rounded-lg overflow-hidden border border-gray-800 hover:border-goth-gold transition duration-300 flex flex-col justify-between group">
+          <div class="p-6 bg-black/40 flex flex-col items-center justify-center min-h-[190px] relative">
+            <div class="w-24 h-24 rounded border border-goth-gold/30 flex items-center justify-center bg-goth-blood/20 group-hover:scale-105 transition duration-500">
+              <i data-lucide="shirt" class="w-10 h-10 text-goth-gold"></i>
+            </div>
+            <span class="absolute top-3 left-3 px-2 py-0.5 rounded text-[10px] bg-goth-red text-white">TOUR ITEM</span>
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h4 class="font-bold text-sm text-white mb-1">『言えなかった告白』ツアーBIG Tシャツ</h4>
+              <p class="text-xs text-gray-400 mb-3">サイズ：FREE / 深紅×漆黒プリント</p>
+            </div>
+            <div class="flex items-center justify-between pt-3 border-t border-gray-800">
+              <span class="font-cinzel font-bold text-goth-gold text-sm">¥4,500</span>
+              <button onclick="addToCart('ツアーBIG Tシャツ', 4500)" class="px-3 py-1.5 rounded bg-goth-blood hover:bg-goth-red text-xs text-white transition">
+                カートに追加
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Good 2 -->
+        <div class="bg-goth-card rounded-lg overflow-hidden border border-gray-800 hover:border-goth-gold transition duration-300 flex flex-col justify-between group">
+          <div class="p-6 bg-black/40 flex flex-col items-center justify-center min-h-[190px] relative">
+            <div class="w-24 h-24 rounded border border-goth-gold/30 flex items-center justify-center bg-goth-blood/20 group-hover:scale-105 transition duration-500">
+              <i data-lucide="sparkles" class="w-10 h-10 text-rose-300"></i>
+            </div>
+            <span class="absolute top-3 left-3 px-2 py-0.5 rounded text-[10px] bg-goth-gold text-black font-bold">LIMITED</span>
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h4 class="font-bold text-sm text-white mb-1">ロザリオチャーム付き マフラータオル</h4>
+              <p class="text-xs text-gray-400 mb-3">ジャガード織 / 金属チャーム付属</p>
+            </div>
+            <div class="flex items-center justify-between pt-3 border-t border-gray-800">
+              <span class="font-cinzel font-bold text-goth-gold text-sm">¥2,500</span>
+              <button onclick="addToCart('マフラータオル', 2500)" class="px-3 py-1.5 rounded bg-goth-blood hover:bg-goth-red text-xs text-white transition">
+                カートに追加
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Good 3 -->
+        <div class="bg-goth-card rounded-lg overflow-hidden border border-gray-800 hover:border-goth-gold transition duration-300 flex flex-col justify-between group">
+          <div class="p-6 bg-black/40 flex flex-col items-center justify-center min-h-[190px] relative">
+            <div class="w-24 h-24 rounded border border-goth-gold/30 flex items-center justify-center bg-goth-blood/20 group-hover:scale-105 transition duration-500">
+              <i data-lucide="image" class="w-10 h-10 text-amber-200"></i>
+            </div>
+            <span class="absolute top-3 left-3 px-2 py-0.5 rounded text-[10px] bg-gray-800 text-gray-300">定番</span>
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h4 class="font-bold text-sm text-white mb-1">ランダムチェキ (当日撮り下ろし)</h4>
+              <p class="text-xs text-gray-400 mb-3">全24種 / 当たりはメンバー直筆サイン入</p>
+            </div>
+            <div class="flex items-center justify-between pt-3 border-t border-gray-800">
+              <span class="font-cinzel font-bold text-goth-gold text-sm">¥1,000</span>
+              <button onclick="addToCart('ランダムチェキ', 1000)" class="px-3 py-1.5 rounded bg-goth-blood hover:bg-goth-red text-xs text-white transition">
+                カートに追加
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Good 4 -->
+        <div class="bg-goth-card rounded-lg overflow-hidden border border-gray-800 hover:border-goth-gold transition duration-300 flex flex-col justify-between group">
+          <div class="p-6 bg-black/40 flex flex-col items-center justify-center min-h-[190px] relative">
+            <div class="w-24 h-24 rounded border border-goth-gold/30 flex items-center justify-center bg-goth-blood/20 group-hover:scale-105 transition duration-500">
+              <i data-lucide="gem" class="w-10 h-10 text-goth-gold"></i>
+            </div>
+            <span class="absolute top-3 left-3 px-2 py-0.5 rounded text-[10px] bg-rose-950 text-rose-300">受注生産</span>
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h4 class="font-bold text-sm text-white mb-1">ロゴ刻印 アーマーリング (Silver925)</h4>
+              <p class="text-xs text-gray-400 mb-3">完全受注生産 / 専用ポーチ付き</p>
+            </div>
+            <div class="flex items-center justify-between pt-3 border-t border-gray-800">
+              <span class="font-cinzel font-bold text-goth-gold text-sm">¥12,800</span>
+              <button onclick="addToCart('アーマーリング', 12800)" class="px-3 py-1.5 rounded bg-goth-blood hover:bg-goth-red text-xs text-white transition">
+                カートに追加
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       PHOTO GALLERY SECTION (All 7 Photo Archives with High-Res View)
+       ========================================================================= -->
+  <section id="gallery" class="py-20 bg-goth-black relative z-20 border-t border-goth-blood/40">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-12">
+        <span class="font-cinzel text-xs text-goth-crimson tracking-[0.4em] uppercase block mb-1">Visual Archive</span>
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-goth-gold-light tracking-widest">
+          写真画廊
+        </h2>
+        <p class="text-xs text-gray-400 font-cinzel mt-2 tracking-widest">OFFICIAL PHOTO ARCHIVE</p>
+        <div class="w-16 h-0.5 bg-goth-gold mx-auto mt-4"></div>
+      </div>
+
+      <!-- Visual Filter Tabs -->
+      <div class="flex justify-center gap-3 mb-10">
+        <button onclick="filterGallery('all')" class="gallery-tab-btn active px-4 py-1.5 rounded-full text-xs font-cinzel border border-goth-gold bg-goth-gold text-black font-bold transition">
+          ALL PHOTOS (全7点)
+        </button>
+        <button onclick="filterGallery('gothic')" class="gallery-tab-btn px-4 py-1.5 rounded-full text-xs font-cinzel border border-gray-700 text-gray-400 hover:text-white hover:border-goth-gold transition">
+          DARK GOTHIC
+        </button>
+        <button onclick="filterGallery('twilight')" class="gallery-tab-btn px-4 py-1.5 rounded-full text-xs font-cinzel border border-gray-700 text-gray-400 hover:text-white hover:border-goth-gold transition">
+          TWILIGHT NOIR
+        </button>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div id="galleryGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+        
+        <!-- Photo Card 1: 3-Shot Main Gothic -->
+        <div class="gallery-item gothic group relative aspect-[3/4] rounded-lg overflow-hidden border border-goth-gold/30 bg-black cursor-pointer shadow-lg photo-glass-frame" onclick="openImageLightbox('gal-img-1', '全部話しておきたいんだ。 集合メイン写真')">
+          <img id="gal-img-1" src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1200&auto=format&fit=crop" class="w-full h-full object-cover v-filter-gothic group-hover:scale-105 transition duration-500" alt="3-Shot Gothic Visual">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-4">
+            <span class="text-[10px] font-cinzel text-goth-crimson font-bold">DARK GOTHIC</span>
+            <p class="text-xs font-bold text-white">3-Shot Main Visual</p>
+            <span class="text-[10px] text-goth-gold mt-1 flex items-center gap-1"><i data-lucide="zoom-in" class="w-3 h-3"></i> クリックで高画質拡大</span>
+          </div>
+        </div>
+
+        <!-- Photo Card 2: Setsuna Solo Gothic (Left) -->
+        <div class="gallery-item gothic group relative aspect-[3/4] rounded-lg overflow-hidden border border-goth-gold/30 bg-black cursor-pointer shadow-lg photo-glass-frame" onclick="openImageLightbox('gal-img-2', '刹那 - Setsuna Gothic Solo')">
+          <img id="gal-img-2" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1200&auto=format&fit=crop" class="w-full h-full object-cover object-top v-filter-gothic group-hover:scale-105 transition duration-500" alt="刹那 - Setsuna Gothic Solo">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-4">
+            <span class="text-[10px] font-cinzel text-cyan-400 font-bold">刹那 / GUITAR (LEFT)</span>
+            <p class="text-xs font-bold text-white">Gothic Long Coat Look</p>
+            <span class="text-[10px] text-goth-gold mt-1 flex items-center gap-1"><i data-lucide="zoom-in" class="w-3 h-3"></i> クリックで高画質拡大</span>
+          </div>
+        </div>
+
+        <!-- Photo Card 3: Yue Solo Gothic (Center) -->
+        <div class="gallery-item gothic group relative aspect-[3/4] rounded-lg overflow-hidden border border-goth-gold/30 bg-black cursor-pointer shadow-lg photo-glass-frame" onclick="openImageLightbox('gal-img-3', '結映 - Yue Gothic Solo')">
+          <img id="gal-img-3" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1200&auto=format&fit=crop" class="w-full h-full object-cover object-top v-filter-gothic group-hover:scale-105 transition duration-500" alt="結映 - Yue Gothic Solo">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-4">
+            <span class="text-[10px] font-cinzel text-goth-crimson font-bold">結映 / VOCAL (CENTER)</span>
+            <p class="text-xs font-bold text-white">Gothic Fur Collar Look</p>
+            <span class="text-[10px] text-goth-gold mt-1 flex items-center gap-1"><i data-lucide="zoom-in" class="w-3 h-3"></i> クリックで高画質拡大</span>
+          </div>
+        </div>
+
+        <!-- Photo Card 4: Yuki Solo Gothic (Right) -->
+        <div class="gallery-item gothic group relative aspect-[3/4] rounded-lg overflow-hidden border border-goth-gold/30 bg-black cursor-pointer shadow-lg photo-glass-frame" onclick="openImageLightbox('gal-img-4', '祐輝 - Yuki Gothic Solo')">
+          <img id="gal-img-4" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop" class="w-full h-full object-cover object-top v-filter-gothic group-hover:scale-105 transition duration-500" alt="祐輝 - Yuki Gothic Solo">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-4">
+            <span class="text-[10px] font-cinzel text-rose-400 font-bold">祐輝 / GUITAR (RIGHT)</span>
+            <p class="text-xs font-bold text-white">Crimson Studded Look</p>
+            <span class="text-[10px] text-goth-gold mt-1 flex items-center gap-1"><i data-lucide="zoom-in" class="w-3 h-3"></i> クリックで高画質拡大</span>
+          </div>
+        </div>
+
+        <!-- Photo Card 5: Setsuna Twilight Solo -->
+        <div class="gallery-item twilight group relative aspect-[3/4] rounded-lg overflow-hidden border border-goth-gold/30 bg-black cursor-pointer shadow-lg photo-glass-frame" onclick="openImageLightbox('gal-img-5', '刹那 - Setsuna Twilight Look')">
+          <img id="gal-img-5" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200&auto=format&fit=crop" class="w-full h-full object-cover object-top v-filter-gothic group-hover:scale-105 transition duration-500" alt="刹那 - Setsuna Twilight Look">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-4">
+            <span class="text-[10px] font-cinzel text-amber-300 font-bold">TWILIGHT NOIR</span>
+            <p class="text-xs font-bold text-white">刹那 - Short Jacket & Shirt</p>
+            <span class="text-[10px] text-goth-gold mt-1 flex items-center gap-1"><i data-lucide="zoom-in" class="w-3 h-3"></i> クリックで高画質拡大</span>
+          </div>
+        </div>
+
+        <!-- Photo Card 6: Yue Twilight Solo -->
+        <div class="gallery-item twilight group relative aspect-[3/4] rounded-lg overflow-hidden border border-goth-gold/30 bg-black cursor-pointer shadow-lg photo-glass-frame" onclick="openImageLightbox('gal-img-6', '結映 - Yue Twilight Look')">
+          <img id="gal-img-6" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1200&auto=format&fit=crop" class="w-full h-full object-cover object-top v-filter-gothic group-hover:scale-105 transition duration-500" alt="結映 - Yue Twilight Look">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-4">
+            <span class="text-[10px] font-cinzel text-amber-300 font-bold">TWILIGHT NOIR</span>
+            <p class="text-xs font-bold text-white">結映 - Graphic Mode Shirt Look</p>
+            <span class="text-[10px] text-goth-gold mt-1 flex items-center gap-1"><i data-lucide="zoom-in" class="w-3 h-3"></i> クリックで高画質拡大</span>
+          </div>
+        </div>
+
+        <!-- Photo Card 7: Yuki Twilight Solo -->
+        <div class="gallery-item twilight group relative aspect-[3/4] rounded-lg overflow-hidden border border-goth-gold/30 bg-black cursor-pointer shadow-lg photo-glass-frame" onclick="openImageLightbox('gal-img-7', '祐輝 - Yuki Twilight Look')">
+          <img id="gal-img-7" src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=1200&auto=format&fit=crop" class="w-full h-full object-cover object-top v-filter-gothic group-hover:scale-105 transition duration-500" alt="祐輝 - Yuki Twilight Look">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-4">
+            <span class="text-[10px] font-cinzel text-amber-300 font-bold">TWILIGHT NOIR</span>
+            <p class="text-xs font-bold text-white">祐輝 - Slash Shirt Look</p>
+            <span class="text-[10px] text-goth-gold mt-1 flex items-center gap-1"><i data-lucide="zoom-in" class="w-3 h-3"></i> クリックで高画質拡大</span>
+          </div>
+        </div>
+
+        <!-- Photo Card 8: High-Res Upload / Custom Slot -->
+        <div class="group relative aspect-[3/4] rounded-lg overflow-hidden border border-dashed border-goth-gold/50 bg-goth-card flex flex-col items-center justify-center p-4 text-center cursor-pointer hover:border-goth-gold transition" onclick="triggerCustomImageUpload()">
+          <input type="file" id="localImageInput" class="hidden" accept="image/*" onchange="handleLocalImageUpload(event)">
+          <i data-lucide="upload-cloud" class="w-8 h-8 text-goth-gold mb-2 group-hover:scale-110 transition"></i>
+          <span class="text-xs font-bold text-goth-gold-light">写真ファイルの差し替え</span>
+          <span class="text-[10px] text-gray-400 mt-1">手元の最高画質ファイルを選択して即座にプレビュー</span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       NEWS & TOPICS SECTION
+       ========================================================================= -->
+  <section id="news" class="py-20 bg-goth-dark relative z-20 border-t border-goth-gold/20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="font-cinzel text-xs text-goth-crimson tracking-[0.4em] uppercase block mb-1">Information</span>
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-goth-gold-light tracking-widest">最新情報</h2>
+        <div class="w-16 h-0.5 bg-goth-gold mx-auto mt-4"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <article class="bg-goth-card p-6 rounded-lg border border-gray-800 hover:border-goth-crimson transition duration-300">
+          <time class="font-cinzel text-xs text-goth-gold">2026.09.01</time>
+          <span class="inline-block ml-2 px-2 py-0.5 rounded text-[10px] bg-goth-red text-white">RELEASE</span>
+          <h3 class="font-bold text-sm text-white mt-2 mb-2">1st Full Album『話しておくよ』全国配信リリース</h3>
+          <p class="text-xs text-gray-400 leading-relaxed">全11曲を収録した待望のフルアルバムが各種配信ストアにて解禁。</p>
+        </article>
+        <article class="bg-goth-card p-6 rounded-lg border border-gray-800 hover:border-goth-crimson transition duration-300">
+          <time class="font-cinzel text-xs text-goth-gold">2026.08.28</time>
+          <span class="inline-block ml-2 px-2 py-0.5 rounded text-[10px] bg-amber-900/60 text-amber-200">LIVE</span>
+          <h3 class="font-bold text-sm text-white mt-2 mb-2">単独巡業2026「言えなかった告白」東名阪ツアー開催</h3>
+          <p class="text-xs text-gray-400 leading-relaxed">東京・名古屋・大阪の3会場にてワンマンライブツアー決定。チケット予約受付中。</p>
+        </article>
+        <article class="bg-goth-card p-6 rounded-lg border border-gray-800 hover:border-goth-crimson transition duration-300">
+          <time class="font-cinzel text-xs text-goth-gold">2026.08.15</time>
+          <span class="inline-block ml-2 px-2 py-0.5 rounded text-[10px] bg-purple-950 text-purple-200">MEDIA</span>
+          <h3 class="font-bold text-sm text-white mt-2 mb-2">新ヴィジュアル公開 ＆ オフィシャルサイト開設</h3>
+          <p class="text-xs text-gray-400 leading-relaxed">最新アーティスト写真およびロゴマークを公開いたしました。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       CONTACT & FAN MESSAGE SECTION
+       ========================================================================= -->
+  <section id="contact" class="py-24 bg-goth-black relative z-20 border-t border-goth-gold/20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-16">
+        <span class="font-cinzel text-xs text-goth-gold tracking-[0.4em] uppercase block mb-1">Fan Letter & Contact</span>
+        <h2 class="text-3xl sm:text-5xl font-serif font-bold text-white tracking-widest">
+          言伝・お問い合わせ
+        </h2>
+        <p class="text-xs text-gray-400 font-cinzel mt-2 tracking-widest">CONTACT & FAN MESSAGES</p>
+        <div class="w-20 h-0.5 bg-goth-crimson mx-auto mt-4"></div>
+      </div>
+
+      <div class="bg-goth-card/90 rounded-xl p-8 sm:p-10 border border-goth-gold/30 ornate-border">
+        <form id="fanContactForm" onsubmit="handleFormSubmit(event)" class="space-y-6">
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs font-serif text-goth-gold mb-2">お名前 / 貴名 <span class="text-goth-crimson">*</span></label>
+              <input type="text" required placeholder="お名前 / 狂詩ネーム" class="w-full px-4 py-3 rounded bg-goth-dark border border-gray-700 focus:border-goth-gold focus:outline-none text-xs text-white">
+            </div>
+            <div>
+              <label class="block text-xs font-serif text-goth-gold mb-2">メールアドレス <span class="text-goth-crimson">*</span></label>
+              <input type="email" required placeholder="your-email@example.com" class="w-full px-4 py-3 rounded bg-goth-dark border border-gray-700 focus:border-goth-gold focus:outline-none text-xs text-white">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-serif text-goth-gold mb-2">宛先 / 対象メンバー</label>
+            <select class="w-full px-4 py-3 rounded bg-goth-dark border border-gray-700 focus:border-goth-gold focus:outline-none text-xs text-white">
+              <option value="all">メンバー全員へ</option>
+              <option value="setsuna">刹那 - Setsuna (Guitar / 左配置) 宛</option>
+              <option value="yue">結映 - Yue (Vocal / 中央配置) 宛</option>
+              <option value="yuki">祐輝 - Yuki (Guitar / 右配置) 宛</option>
+              <option value="management">運営・ライブ出演依頼など</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-serif text-goth-gold mb-2">メッセージ / 告白 <span class="text-goth-crimson">*</span></label>
+            <textarea rows="5" required placeholder="あなたの中に秘めた言葉をお聞かせください。" class="w-full px-4 py-3 rounded bg-goth-dark border border-gray-700 focus:border-goth-gold focus:outline-none text-xs text-white"></textarea>
+          </div>
+
+          <div class="text-center pt-4">
+            <button type="submit" class="w-full sm:w-auto px-12 py-3 rounded-full bg-gradient-to-r from-goth-blood via-goth-red to-goth-crimson hover:from-goth-red hover:to-rose-600 text-white font-serif font-bold text-xs tracking-widest transition duration-300 shadow-xl border border-goth-gold/40">
+              メッセージを送信する
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       FOOTER
+       ========================================================================= -->
+  <footer class="bg-black py-12 border-t border-goth-gold/20 relative z-20 text-center text-xs text-gray-500 font-serif">
+    <div class="max-w-7xl mx-auto px-4 space-y-6">
+      <div class="flex items-center justify-center gap-3">
+        <div class="w-8 h-8 rounded-full border border-goth-gold p-1 flex items-center justify-center" id="footerLogoContainer"></div>
+        <span class="font-serif font-bold text-sm tracking-widest text-gray-300">全部話しておきたいんだ。</span>
+      </div>
+      <div class="flex justify-center gap-6 text-gray-400">
+        <a href="https://linkco.re/eUVZdT05" target="_blank" rel="noopener noreferrer" class="hover:text-goth-crimson transition flex items-center gap-1">
+          <i data-lucide="headphones" class="w-4 h-4"></i> LinkCore
+        </a>
+        <a href="#" onclick="showModalMessage('X (Twitter)', '@zenbu_official をフォローしてください')" class="hover:text-goth-gold transition"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+        <a href="#" onclick="showModalMessage('Instagram', '@zenbu_official')" class="hover:text-goth-gold transition"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+        <a href="#" onclick="showModalMessage('YouTube', 'オフィシャルYouTubeチャンネル')" class="hover:text-goth-gold transition"><i data-lucide="youtube" class="w-4 h-4"></i></a>
+      </div>
+      <p class="tracking-widest">&copy; 2026 全部話しておきたいんだ。 ALL RIGHTS RESERVED.</p>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       TICKET RESERVATION MODAL (チケット予約専用モーダル)
+       ========================================================================= -->
+  <div id="ticketModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-goth-card max-w-lg w-full rounded-lg p-6 sm:p-8 border border-goth-gold ornate-border relative shadow-2xl animate-fade-in max-h-[92vh] overflow-y-auto">
+      <button onclick="closeTicketModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      
+      <div class="text-center mb-6">
+        <span class="text-[10px] font-cinzel text-goth-crimson tracking-widest uppercase font-bold">Ticket Reservation</span>
+        <h3 class="text-xl sm:text-2xl font-serif font-black text-goth-gold-light mt-1" id="ticketModalLiveTitle">公演名</h3>
+        <p class="text-xs text-gray-400 mt-1">WEBチケット取り置き仮予約フォーム</p>
+      </div>
+
+      <form id="ticketBookingForm" onsubmit="submitTicketBooking(event)" class="space-y-4 text-xs">
+        <div>
+          <label class="block text-gray-300 font-serif mb-1">お名前 (フリガナ) <span class="text-goth-crimson">*</span></label>
+          <input type="text" id="ticketUserName" required placeholder="狂詩 太郎 (キョウシ タロウ)" class="w-full px-3.5 py-2.5 rounded bg-goth-dark border border-gray-700 focus:border-goth-gold focus:outline-none text-white">
+        </div>
+
+        <div>
+          <label class="block text-gray-300 font-serif mb-1">メールアドレス <span class="text-goth-crimson">*</span></label>
+          <input type="email" id="ticketUserEmail" required placeholder="your-email@example.com" class="w-full px-3.5 py-2.5 rounded bg-goth-dark border border-gray-700 focus:border-goth-gold focus:outline-none text-white">
+          <span class="text-[10px] text-gray-500 mt-0.5 block">※整理番号と予約完了通知が送付されます。</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-gray-300 font-serif mb-1">席種 / チケット種別</label>
+            <select id="ticketType" class="w-full px-3 py-2 rounded bg-goth-dark border border-gray-700 focus:border-goth-gold focus:outline-none text-white text-xs">
+              <option value="standard">一般スタンディング (¥4,800)</option>
+              <option value="vip">VIP優先入場・限定特典付 (¥7,800)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-gray-300 font-serif mb-1">枚数</label>
+            <select id="ticketCount" class="w-full px-3 py-2 rounded bg-goth-dark border border-gray-700 focus:border-goth-gold focus:outline-none text-white text-xs">
+              <option value="1">1枚</option>
+              <option value="2">2枚</option>
+              <option value="3">3枚</option>
+              <option value="4">4枚</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-gray-300 font-serif mb-1">お目当てのメンバー（動員アンケート）</label>
+          <select id="ticketFavMember" class="w-full px-3 py-2 rounded bg-goth-dark border border-gray-700 focus:border-goth-gold focus:outline-none text-white text-xs">
+            <option value="yue">結映 (Vocal)</option>
+            <option value="setsuna">刹那 (Guitar / Left)</option>
+            <option value="yuki">祐輝 (Guitar / Right)</option>
+            <option value="band">バンド全体</option>
+          </select>
+        </div>
+
+        <div class="p-3 bg-black/60 rounded border border-gray-800 text-[11px] text-gray-400">
+          ◆ お支払い方法：当日会場受付にて現金決済（ドリンク代別）<br>
+          ◆ キャンセル・変更は公演前日23:59までお問い合わせフォームより受付。
+        </div>
+
+        <div class="pt-2 flex justify-end gap-3">
+          <button type="button" onclick="closeTicketModal()" class="px-4 py-2 rounded border border-gray-700 text-gray-300 hover:text-white text-xs">キャンセル</button>
+          <button type="submit" class="px-6 py-2 rounded bg-gradient-to-r from-goth-blood via-goth-red to-goth-crimson text-white font-bold text-xs tracking-wider shadow-lg hover:shadow-[0_0_15px_rgba(190,18,60,0.6)] transition">
+            予約を確定する
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- HIGH-RESOLUTION LIGHTBOX MODAL -->
+  <div id="imageLightbox" class="fixed inset-0 bg-black/95 z-50 hidden flex flex-col items-center justify-center p-4 backdrop-blur-md transition-opacity duration-300">
+    <button onclick="closeImageLightbox()" class="absolute top-6 right-6 p-2.5 rounded-full bg-goth-card border border-goth-gold/50 text-goth-gold hover:text-white transition">
+      <i data-lucide="x" class="w-6 h-6"></i>
+    </button>
+    <div class="relative max-w-5xl max-h-[85vh] flex flex-col items-center justify-center p-2">
+      <img id="lightboxImage" src="" alt="Enlarged View" class="max-w-full max-h-[78vh] object-contain rounded border border-goth-gold/40 shadow-2xl v-filter-gothic">
+      <p id="lightboxCaption" class="text-xs text-goth-gold font-serif mt-3 tracking-widest"></p>
+    </div>
+  </div>
+
+  <!-- LOGO SELECTOR MODAL (4 PATTERNS COMPARISON) -->
+  <div id="logoSelectorModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-goth-card max-w-3xl w-full rounded-lg p-6 sm:p-8 border border-goth-gold ornate-border relative shadow-2xl max-h-[90vh] overflow-y-auto">
+      <button onclick="closeLogoSelectorModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      
+      <div class="text-center mb-6">
+        <span class="text-[10px] font-cinzel text-goth-crimson tracking-widest uppercase">Logo Concept Studio</span>
+        <h3 class="text-2xl font-serif font-black text-goth-gold-light mt-1">シンボルロゴ 4案 比較検証</h3>
+        <p class="text-xs text-gray-400 mt-1">クリックで選択したロゴがWebサイト全体に即座に反映されます。</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div onclick="selectLogoPattern(1)" class="p-4 rounded bg-black/60 border border-gray-800 hover:border-goth-gold cursor-pointer transition group flex flex-col items-center text-center">
+          <div class="w-24 h-24 mb-3 flex items-center justify-center" id="modalLogoPreview1"></div>
+          <span class="text-xs font-bold text-goth-gold group-hover:text-white">案①【告白の鍵 × 錠前 × 全】</span>
+          <p class="text-[11px] text-gray-400 mt-1">心の鍵を開けて全てを打ち明けるアンティークキー構図。</p>
+        </div>
+        <div onclick="selectLogoPattern(2)" class="p-4 rounded bg-black/60 border border-gray-800 hover:border-goth-gold cursor-pointer transition group flex flex-col items-center text-center">
+          <div class="w-24 h-24 mb-3 flex items-center justify-center" id="modalLogoPreview2"></div>
+          <span class="text-xs font-bold text-goth-gold group-hover:text-white">案②【茨の十字架 × 鋭利ゴシック】</span>
+          <p class="text-[11px] text-gray-400 mt-1">痛覚と逆十字、ブラックレターの鋭利なV系王道シンボル。</p>
+        </div>
+        <div onclick="selectLogoPattern(3)" class="p-4 rounded bg-black/60 border border-gray-800 hover:border-goth-gold cursor-pointer transition group flex flex-col items-center text-center">
+          <div class="w-24 h-24 mb-3 flex items-center justify-center" id="modalLogoPreview3"></div>
+          <span class="text-xs font-bold text-goth-gold group-hover:text-white">案③【見通す瞳・語る唇 × 幾何学】</span>
+          <p class="text-[11px] text-gray-400 mt-1">全てを見通し言葉を紡ぐ、モダンでモードな幾何学設計。</p>
+        </div>
+        <div onclick="selectLogoPattern(4)" class="p-4 rounded bg-black/60 border border-gray-800 hover:border-goth-gold cursor-pointer transition group flex flex-col items-center text-center">
+          <div class="w-24 h-24 mb-3 flex items-center justify-center" id="modalLogoPreview4"></div>
+          <span class="text-xs font-bold text-goth-gold group-hover:text-white">案④【堕天使の片翼 × ロザリオ】</span>
+          <p class="text-[11px] text-gray-400 mt-1">漆黒の翼と垂れ下がるクロスが耽美な世界観を強調。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GENERAL MODAL UI -->
+  <div id="generalModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-goth-card max-w-lg w-full rounded-lg p-6 sm:p-8 border border-goth-gold ornate-border relative shadow-2xl">
+      <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       JAVASCRIPT LOGIC
+       ========================================================================= -->
+  <script>
+    lucide.createIcons();
+
+    // -------------------------------------------------------------
+    // High-Resolution Member Image URL Definitions (3 Members)
+    // -------------------------------------------------------------
+    const memberVisuals = {
+      setsuna: {
+        gothic: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1200&auto=format&fit=crop',
+        twilight: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200&auto=format&fit=crop'
+      },
+      yue: {
+        gothic: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1200&auto=format&fit=crop',
+        twilight: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1200&auto=format&fit=crop'
+      },
+      yuki: {
+        gothic: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop',
+        twilight: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=1200&auto=format&fit=crop'
+      }
+    };
+
+    function switchMemberCostume(phase) {
+      document.getElementById('setsunaImg').src = memberVisuals.setsuna[phase];
+      document.getElementById('yueImg').src = memberVisuals.yue[phase];
+      document.getElementById('yukiImg').src = memberVisuals.yuki[phase];
+
+      const btnGothic = document.getElementById('costumeBtn-gothic');
+      const btnTwilight = document.getElementById('costumeBtn-twilight');
+
+      if (phase === 'gothic') {
+        btnGothic.classList.add('bg-goth-gold', 'text-black', 'font-bold');
+        btnGothic.classList.remove('text-gray-400');
+        btnTwilight.classList.remove('bg-goth-gold', 'text-black', 'font-bold');
+        btnTwilight.classList.add('text-gray-400');
+      } else {
+        btnTwilight.classList.add('bg-goth-gold', 'text-black', 'font-bold');
+        btnTwilight.classList.remove('text-gray-400');
+        btnGothic.classList.remove('bg-goth-gold', 'text-black', 'font-bold');
+        btnGothic.classList.add('text-gray-400');
+      }
+    }
+
+    // -------------------------------------------------------------
+    // Ticket Reservation Modal Logic
+    // -------------------------------------------------------------
+    let currentBookingLiveTitle = '';
+
+    function openTicketModal(liveTitle) {
+      currentBookingLiveTitle = liveTitle;
+      document.getElementById('ticketModalLiveTitle').textContent = liveTitle;
+      document.getElementById('ticketModal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeTicketModal() {
+      document.getElementById('ticketModal').classList.add('hidden');
+    }
+
+    function submitTicketBooking(e) {
+      e.preventDefault();
+      const name = document.getElementById('ticketUserName').value;
+      const count = document.getElementById('ticketCount').value;
+      const type = document.getElementById('ticketType').value === 'vip' ? 'VIP優先チケット' : '一般スタンディング';
+      const randomNum = Math.floor(Math.random() * 80) + 1;
+      const serial = 'ZH-' + String(randomNum).padStart(3, '0');
+
+      closeTicketModal();
+      showModalMessage(
+        '【仮予約完了】チケットを確保しました',
+        `<div class="text-left space-y-2">
+          <p class="text-white font-bold">公演：${currentBookingLiveTitle}</p>
+          <div class="p-3 bg-black/60 rounded border border-goth-gold/40 text-xs">
+            <div>◆ 整理番号: <strong class="text-goth-gold text-sm font-cinzel">${serial}</strong></div>
+            <div>◆ お名前: ${name} 様</div>
+            <div>◆ 券種: ${type} × ${count}枚</div>
+            <div>◆ 入場時決済: 当日会場にてお支払い</div>
+          </div>
+          <p class="text-xs text-gray-400 mt-2">ご入力いただいたメールアドレス宛に予約確認書を送付いたしました。当日受付にて整理番号をお伝えください。</p>
+        </div>`
+      );
+      e.target.reset();
+    }
+
+    function addToCart(item, price) {
+      showModalMessage(
+        'ショッピングカートに追加しました',
+        `【${item}】(¥${price.toLocaleString()}) をカートに追加しました。<br>画面上部のSTOREよりいつでもご注文手続きが可能です。`
+      );
+    }
+
+    // -------------------------------------------------------------
+    // Vector SVG Logo Definitions (4 Designs)
+    // -------------------------------------------------------------
+    const logoSVGs = {
+      1: `
+        <svg class="w-full h-full text-goth-gold drop-shadow-[0_0_8px_rgba(212,175,55,0.7)]" viewBox="0 0 100 100" fill="none" stroke="currentColor">
+          <circle cx="50" cy="24" r="16" stroke-width="2.5" stroke="url(#goldGrad1)"/>
+          <circle cx="50" cy="24" r="10" stroke-width="1" stroke-dasharray="2 3"/>
+          <path d="M50 40 L50 88" stroke-width="3" stroke="url(#goldGrad1)" stroke-linecap="round"/>
+          <path d="M50 62 L64 62 M50 72 L60 72 M50 82 L66 82" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M30 46 L50 32 L70 46" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="50" cy="24" r="3" fill="#be123c"/>
+          <defs>
+            <linearGradient id="goldGrad1" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#fff2d6"/>
+              <stop offset="0.5" stop-color="#d4af37"/>
+              <stop offset="1" stop-color="#881337"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      `,
+      2: `
+        <svg class="w-full h-full text-rose-400 drop-shadow-[0_0_8px_rgba(190,18,60,0.8)]" viewBox="0 0 100 100" fill="none" stroke="currentColor">
+          <path d="M50 8 L50 92" stroke-width="3.5" stroke="url(#crimsonGrad2)" stroke-linecap="square"/>
+          <path d="M22 68 L78 68" stroke-width="3.5" stroke="url(#crimsonGrad2)" stroke-linecap="square"/>
+          <path d="M42 30 L50 38 L58 30 M40 52 L50 44 L60 52" stroke-width="2" stroke="#d4af37"/>
+          <path d="M26 40 L50 18 L74 40" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M36 50 L64 50 M38 60 L62 60" stroke-width="1.8"/>
+          <circle cx="50" cy="68" r="4" fill="#881337" stroke="#d4af37" stroke-width="1.5"/>
+          <defs>
+            <linearGradient id="crimsonGrad2" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#ffffff"/>
+              <stop offset="0.3" stop-color="#f43f5e"/>
+              <stop offset="1" stop-color="#4c0519"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      `,
+      3: `
+        <svg class="w-full h-full text-goth-gold drop-shadow-[0_0_8px_rgba(212,175,55,0.7)]" viewBox="0 0 100 100" fill="none" stroke="currentColor">
+          <polygon points="50,14 16,84 84,84" stroke-width="2" stroke="url(#goldGrad3)"/>
+          <polygon points="50,26 26,78 74,78" stroke-width="1" stroke-dasharray="3 3"/>
+          <path d="M36 54 Q50 42 64 54 Q50 66 36 54 Z" stroke-width="2" stroke="#be123c"/>
+          <circle cx="50" cy="54" r="4" fill="#f3e5ab" stroke="#881337" stroke-width="1.5"/>
+          <path d="M42 70 Q50 65 58 70 Q50 75 42 70 Z" fill="#be123c" stroke-width="1"/>
+          <defs>
+            <linearGradient id="goldGrad3" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#fff"/>
+              <stop offset="0.5" stop-color="#c5a059"/>
+              <stop offset="1" stop-color="#be123c"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      `,
+      4: `
+        <svg class="w-full h-full text-goth-gold-light drop-shadow-[0_0_8px_rgba(212,175,55,0.7)]" viewBox="0 0 100 100" fill="none" stroke="currentColor">
+          <path d="M50 25 C30 15 12 35 15 65 C25 60 35 55 45 62" stroke-width="2.5" stroke-url(#goldGrad4)"/>
+          <path d="M50 25 C70 15 88 35 85 65 C75 60 65 55 55 62" stroke-width="2.5" stroke-url(#goldGrad4)"/>
+          <path d="M45 62 Q50 74 55 62" stroke-width="1.5" stroke-dasharray="2 2"/>
+          <path d="M50 74 L50 92 M44 82 L56 82" stroke-width="2.5" stroke="#be123c" stroke-linecap="round"/>
+          <path d="M38 42 L50 30 L62 42" stroke-width="2" stroke="#ffffff"/>
+          <defs>
+            <linearGradient id="goldGrad4" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#fff2d6"/>
+              <stop offset="0.4" stop-color="#d4af37"/>
+              <stop offset="1" stop-color="#881337"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      `
+    };
+
+    function applyActiveLogo(patternNumber) {
+      const svg = logoSVGs[patternNumber];
+      document.getElementById('headerLogoContainer').innerHTML = svg;
+      document.getElementById('heroEmblemContainer').innerHTML = svg;
+      document.getElementById('footerLogoContainer').innerHTML = svg;
+      const discoCover = document.getElementById('discoCoverLogo');
+      if(discoCover) discoCover.innerHTML = svg;
+    }
+
+    function openLogoSelectorModal() {
+      document.getElementById('modalLogoPreview1').innerHTML = logoSVGs[1];
+      document.getElementById('modalLogoPreview2').innerHTML = logoSVGs[2];
+      document.getElementById('modalLogoPreview3').innerHTML = logoSVGs[3];
+      document.getElementById('modalLogoPreview4').innerHTML = logoSVGs[4];
+      document.getElementById('logoSelectorModal').classList.remove('hidden');
+    }
+
+    function closeLogoSelectorModal() {
+      document.getElementById('logoSelectorModal').classList.add('hidden');
+    }
+
+    function selectLogoPattern(num) {
+      applyActiveLogo(num);
+      closeLogoSelectorModal();
+      showModalMessage('ロゴデザインを適用しました', `【案${num}】をWebサイト全体のシンボルマークとして設定しました。`);
+    }
+    applyActiveLogo(1);
+
+    // Lightbox Function
+    function openImageLightbox(imgElementId, caption = '') {
+      const targetImg = document.getElementById(imgElementId);
+      if(!targetImg) return;
+      const lightbox = document.getElementById('imageLightbox');
+      const lightboxImg = document.getElementById('lightboxImage');
+      const captionElem = document.getElementById('lightboxCaption');
+      lightboxImg.src = targetImg.src;
+      captionElem.textContent = caption || targetImg.alt || 'HIGH RESOLUTION VIEW';
+      lightbox.classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeImageLightbox() {
+      document.getElementById('imageLightbox').classList.add('hidden');
+    }
+
+    // Local Image Replacement
+    function triggerCustomImageUpload() {
+      document.getElementById('localImageInput').click();
+    }
+
+    function handleLocalImageUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const customUrl = evt.target.result;
+        document.getElementById('mainKeyVisual').src = customUrl;
+        document.getElementById('gal-img-1').src = customUrl;
+        showModalMessage('高画質写真を反映しました', 'お手元の高画質写真をメインビジュアルに反映しました。');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Gallery Filter
+    function filterGallery(type) {
+      const items = document.querySelectorAll('.gallery-item');
+      const buttons = document.querySelectorAll('.gallery-tab-btn');
+      buttons.forEach(b => {
+        b.classList.remove('bg-goth-gold', 'text-black', 'font-bold');
+        b.classList.add('text-gray-400', 'border-gray-700');
+      });
+      event.target.classList.add('bg-goth-gold', 'text-black', 'font-bold');
+      event.target.classList.remove('text-gray-400', 'border-gray-700');
+
+      items.forEach(item => {
+        if(type === 'all' || item.classList.contains(type)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    }
+
+    function showModalMessage(title, text) {
+      const modal = document.getElementById('generalModal');
+      const content = document.getElementById('modalContent');
+      content.innerHTML = `
+        <h3 class="font-serif font-bold text-lg text-goth-gold mb-3">${title}</h3>
+        <p class="text-xs text-gray-300 leading-relaxed">${text}</p>
+        <div class="mt-6 text-right">
+          <button onclick="closeModal()" class="px-5 py-2 rounded bg-goth-blood hover:bg-goth-red text-xs text-white tracking-widest">閉じる</button>
+        </div>
+      `;
+      modal.classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeModal() {
+      document.getElementById('generalModal').classList.add('hidden');
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      showModalMessage('送信完了', 'メッセージを受け取りました。あなたの言葉は大切にメンバーへ届けられます。');
+      e.target.reset();
+    }
+
+    // Detailed Member Modal (Setsuna / Yue / Yuki)
+    function openMemberModal(member) {
+      if(member === 'setsuna') {
+        showModalMessage(
+          '刹那 - SETSUNA (Guitar / 左配置)', 
+          `「言葉よりも、爪弾く旋律のほうが本音を語れる気がする。」<br><br>
+          <div class="p-3 bg-black/60 rounded border border-gray-800 space-y-1 text-left">
+            <div>◆ パート: Guitar (Left)</div>
+            <div>◆ 誕生日: 1月4日</div>
+            <div>◆ 血液型: A型(たしか)</div>
+            <div>◆ 趣味: 作曲</div>
+            <div>◆ 特技: ばくれつけん</div>
+          </div>`
+        );
+      } else if(member === 'yue') {
+        showModalMessage(
+          '結映 - YUE (Vocal / 中央配置)', 
+          `「言えない痛みを、隠した傷跡を、今夜すべて曝け出す——」<br><br>
+          <div class="p-3 bg-black/60 rounded border border-gray-800 space-y-1 text-left">
+            <div>◆ パート: Vocal / Words (Center)</div>
+            <div>◆ 誕生日: 6月19日</div>
+            <div>◆ 血液型: O型(たぶん)</div>
+            <div>◆ 趣味: 犬の散歩</div>
+            <div>◆ 特技: ちからため</div>
+          </div>`
+        );
+      } else if(member === 'yuki') {
+        showModalMessage(
+          '祐輝 - YUKI (Guitar / 右配置)', 
+          `「ステージの上では誰よりも高く、熱く跳び跳ねてみせる。」<br><br>
+          <div class="p-3 bg-black/60 rounded border border-gray-800 space-y-1 text-left">
+            <div>◆ パート: Guitar (Right)</div>
+            <div>◆ 誕生日: 5月27日</div>
+            <div>◆ 血液型: O型(Ogata)</div>
+            <div>◆ 趣味: ゲーム</div>
+            <div>◆ 特技: バク転</div>
+          </div>`
+        );
+      }
+    }
+
+    // Web Audio Synthesizer
+    let audioCtx = null;
+    let isBgmPlaying = false;
+    let bgmInterval = null;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function playTone(freq, type = 'sawtooth', duration = 0.8, delay = 0) {
+      if (!audioCtx) initAudio();
+      setTimeout(() => {
+        try {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          const filter = audioCtx.createBiquadFilter();
+          osc.type = type;
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+          filter.type = 'lowpass';
+          filter.frequency.setValueAtTime(900, audioCtx.currentTime);
+          gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+          osc.connect(filter);
+          filter.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start();
+          osc.stop(audioCtx.currentTime + duration);
+        } catch(e) {}
+      }, delay * 1000);
+    }
+
+    const melodyNotes = [
+      [293.66, 349.23, 440.00, 554.37, 587.33],
+      [220.00, 261.63, 329.63, 415.30, 440.00]
+    ];
+
+    function playMelody(index, trackName) {
+      initAudio();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      showModalMessage('プレビュー試聴', `『${trackName}』のアルペジオを再生中。<br><a href="https://linkco.re/eUVZdT05" target="_blank" class="text-goth-crimson underline font-bold mt-2 inline-block">▶ フル音源はLinkCoreで聴く</a>`);
+      const notes = melodyNotes[index % melodyNotes.length];
+      notes.forEach((freq, idx) => {
+        playTone(freq, 'sawtooth', 1.2, idx * 0.25);
+        playTone(freq * 0.5, 'sine', 1.6, idx * 0.25);
+      });
+    }
+
+    function toggleBGM() {
+      initAudio();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const btnText = document.getElementById('bgmStatusText');
+      const icon = document.getElementById('bgmIcon');
+      if (!isBgmPlaying) {
+        isBgmPlaying = true;
+        btnText.textContent = 'BGM: ON';
+        icon.setAttribute('data-lucide', 'volume-2');
+        let step = 0;
+        bgmInterval = setInterval(() => {
+          const notes = melodyNotes[step % melodyNotes.length];
+          notes.forEach((f, i) => playTone(f, 'sine', 1.0, i * 0.3));
+          step++;
+        }, 1800);
+      } else {
+        isBgmPlaying = false;
+        clearInterval(bgmInterval);
+        btnText.textContent = 'BGM: OFF';
+        icon.setAttribute('data-lucide', 'volume-x');
+      }
+      lucide.createIcons();
+    }
+
+    // Dust Particle Animation
+    const canvas = document.getElementById('ambientCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let particles = [];
+
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedY = -(Math.random() * 0.3 + 0.1);
+        this.speedX = (Math.random() - 0.5) * 0.2;
+        this.opacity = Math.random() * 0.5 + 0.2;
+        this.color = Math.random() > 0.6 ? '#be123c' : (Math.random() > 0.4 ? '#c5a059' : '#cbd5e1');
+      }
+      update() {
+        this.y += this.speedY;
+        this.x += this.speedX;
+        if (this.y < 0) { this.y = height; this.x = Math.random() * width; }
+      }
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.opacity;
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < 40; i++) particles.push(new Particle());
+    function animateParticles() {
+      ctx.clearRect(0, 0, width, height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+  </script>
+</body>
+</html>
